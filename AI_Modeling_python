@@ -68,8 +68,8 @@ list(x_data) #examine column names. they look good
 y_data = data['real_taret_var'] #real target var 
 list(y_data)
 
-x_data.head(n=5) #looks good
-y_data.head(n=5) #looks good
+x_data.head(n=5) 
+y_data.head(n=5) 
 
 x_data.shape
 y_data.shape
