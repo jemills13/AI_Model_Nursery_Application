@@ -1,4 +1,4 @@
-# AI_Model_School Applicant_Application
+# AI_Model_ApplicationPlacement
 
 Problem: there are too many applications for primary school, and our school can't accommodate all of them. 
 Our goal is to develop an ANN model that will evaluate applicants based on different attributes such as occupation of parents, 
