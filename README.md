@@ -1,6 +1,6 @@
 # Admissions Decisions Predictions with an ANN
 
-Each year, administration needs to accept some elementary students into school, and turn away others.
+Each year, administration needs to accept some elementary students into school, while turning away others.
 
 Our goal is to develop an ANN model that is attempting to understand admission decisions for which elementary students are accepted, and which are not. The model is inputted several features such as occupation of parents, family structure, financial standing, social conditions of the family, and health of the family.
 
