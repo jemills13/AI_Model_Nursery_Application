@@ -5,18 +5,13 @@ Created on Thu Apr 12 08:47:42 2018
 @author: Jonny Mills
 """
 '''
-Problem: there are too many applications for nursery school, and our school can't accommodate all of them. 
-Our goal is to develop an ANN model that will evaluate applicants based on different attributes such as occupation of parents, 
-family structure, financial standing, social conditions of the family, and health of the family.
-Our goal is to use ANN to adopt a model that can ideally almost perfectly classify applicants based on their attribute information.
+Our goal is to develop an ANN model to predict admissions decisions based on candidate attributes. 
 Our output variable will be a categorical variable that describes the level of recommendation for that applicant. 
 There are three levels that we intend to classify applicants: acceptance, wait-list, and rejection.
-Click link to view full research analysis.
-https://goo.gl/X3jFpV
+Full research analysis: https://goo.gl/X3jFpV
 '''
-##Here is a copy of the final code
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Import Libraries Section
+Import Libraries
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 print(__doc__)
 from sklearn.model_selection import train_test_split
@@ -31,10 +26,8 @@ import matplotlib.pyplot as plt
 import datetime
 from sklearn import svm
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Load Data Section
+Load Data
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 #Dataset: https://archive.ics.uci.edu/ml/datasets/Nursery
 
@@ -53,14 +46,12 @@ data.dtypes
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Pretreat Data Section
+Pretreat Data
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 new_data = pd.get_dummies(data, columns = ['parents', 'has_nurs', 'form', 'children', 'housing', 'finance', 'social','health']) #creating dumy variables for all the x values.
 #target var is already classified into 3 groups
 print(new_data.shape)
-
-
 
 x_data = new_data[list(new_data)[2::]] #exclude the target variable,
 #colnames(x_data)
@@ -83,7 +74,7 @@ x_train, x_test, y_train, y_test = train_test_split(x_data, y_data, test_size=0.
 new_data.dtypes
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Define Model Section (MLP Classifier)
+Define Model (MLP Classifier)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 hidden_layer_sizes = [50,100]
@@ -125,7 +116,6 @@ print ("Time required for optimization:",stop_time - start_time)
 f.close()
 
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Support vector machine
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -141,7 +131,7 @@ clf.score(x_test, y_test)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Define Model Section (with PCA)
+Define Model (with PCA)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 pca = sklearnPCA(n_components=5)
 pca.fit(x_data)
@@ -187,11 +177,8 @@ f.close()
 #Our MLPClassifier performs significantly better without PCA than with PCA
 
 
-
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Best model Section & confusion matrix
+Best Model Section & Assessment
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 #plugging in the model parameters that yielded the lowest test error rate, we obtain our best model here 
 best_mlp = MLPClassifier(hidden_layer_sizes=(50,), max_iter=20, alpha=1e-4, #
@@ -200,13 +187,9 @@ best_mlp = MLPClassifier(hidden_layer_sizes=(50,), max_iter=20, alpha=1e-4, #
 best_mlp.fit(x_train, y_train)
 a = best_mlp.predict(x_test)
 cm = confusion_matrix(y_test, a)
+
 #add labels to confusion matrix
-
-
 labels = ['Reject applicant', 'Wait List', 'Accpet applicant']
-
-
-
 
 ax= plt.subplot()
 sns.heatmap(cm, annot=True, ax = ax, cmap="Blues",fmt='g'); #annot=True to annotate cells
